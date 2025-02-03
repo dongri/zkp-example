@@ -153,7 +153,7 @@ async function main() {
   await getTotalBalance();
   
   await registerPasswdHash("9627991198915864505483325328123466813840867255700822858612450669559302123886");
-  await executeTransferByFile(bob, "10", "../circom/work/auth/proof.json", "../circom/work/auth/public.json");
+  await executeTransferByFile(bob, "10", "../circom/output/auth/proof.json", "../circom/output/auth/public.json");
   
   await getTotalBalance();
 
