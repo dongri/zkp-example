@@ -12,4 +12,3 @@ $ make solidity
 
 buildでauth.circom参照
 proveでauth.json参照
-

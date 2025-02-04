@@ -9,7 +9,7 @@ $ forge init
 ## Copy Verifier.sol
 
 ```shell
-$ cp ../circom/work/auth/Verifier.sol ./
+$ cp ../circom/output/auth/Verifier.sol ./src/
 ```
 
 

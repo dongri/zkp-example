@@ -12,7 +12,6 @@ const abi = [
     "function transfer(address payable send_to, uint amount, uint256[24] calldata _proof, uint256[2] calldata _pubSignals) public",
     "function deposit() public payable",
     "function getTotalBalance() public view returns (uint256)",
-    "function registerPasswdHash(uint passwd_hash) public"
 ];
 
 const contract = new ethers.Contract(contractAddress, abi, wallet);
@@ -152,8 +151,7 @@ async function main() {
   await depositEther("100");
   await getTotalBalance();
   
-  await registerPasswdHash("9627991198915864505483325328123466813840867255700822858612450669559302123886");
-  await executeTransferByFile(bob, "10", "../circom/output/auth/proof.json", "../circom/output/auth/public.json");
+  await executeTransferByFile(bob, "1", "../circom/output/auth/proof.json", "../circom/output/auth/public.json");
   
   await getTotalBalance();
 

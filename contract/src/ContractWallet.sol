@@ -13,12 +13,7 @@ contract ContractWallet {
     }
 
     mapping(address => uint256) public balance;
-    mapping(address => uint256) public registered_passwd_hash;
     bytes32[] private used_proof;
-
-    function registerPasswdHash(uint256 passwd_hash) public {
-        registered_passwd_hash[msg.sender] = passwd_hash;
-    }
 
     function deposit() public payable {
         require(msg.value > 0, "Deposit amount must be greater than zero");
