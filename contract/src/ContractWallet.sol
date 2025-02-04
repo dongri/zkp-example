@@ -13,7 +13,12 @@ contract ContractWallet {
     }
 
     mapping(address => uint256) public balance;
+    mapping(address => uint) public registered_passwd_hash;
     bytes32[] private used_proof;
+
+    function registerPasswdHash(uint passwd_hash) public {
+        registered_passwd_hash[msg.sender] = passwd_hash;
+    }
 
     function deposit() public payable {
         require(msg.value > 0, "Deposit amount must be greater than zero");
@@ -36,6 +41,12 @@ contract ContractWallet {
                 revert("This proof is already used.");
             }
         }
+
+        address from = address(uint160(_pubSignals[1]));
+        require(msg.sender == from, "You are not prover.");
+
+        uint password_hash = uint(_pubSignals[0]);
+        require(registered_passwd_hash[from] == password_hash, "Invalid password.");
 
         bool validProof = verifierContract.verifyProof(_proof, _pubSignals);
         require(validProof, "Invalid proof.");

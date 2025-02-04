@@ -12,6 +12,7 @@ const abi = [
     "function transfer(address payable send_to, uint amount, uint256[24] calldata _proof, uint256[2] calldata _pubSignals) public",
     "function deposit() public payable",
     "function getTotalBalance() public view returns (uint256)",
+    "function registerPasswdHash(uint passwd_hash) public",
 ];
 
 const contract = new ethers.Contract(contractAddress, abi, wallet);
@@ -143,6 +144,7 @@ async function depositEther(amountInEth) {
 
 alice = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 bob = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+passwordHash = "17154584623908768867321823647785763231079185741998202220265209877223803214098";
 
 async function main() {
   await getBalance(alice); // anvil account first
@@ -150,7 +152,9 @@ async function main() {
   
   await depositEther("100");
   await getTotalBalance();
-  
+
+  await registerPasswdHash(passwordHash);
+
   await executeTransferByFile(bob, "1", "../circom/output/auth/proof.json", "../circom/output/auth/public.json");
   
   await getTotalBalance();
